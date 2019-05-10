@@ -165,12 +165,20 @@ public class X509Certificate: CustomStringConvertible {
 
     /// Gets the notBefore date from the validity period of the certificate.
     public var notBefore: Date? {
-        return block1[X509BlockPosition.dateValidity]?.sub(0)?.value as? Date
+        var date = block1[X509BlockPosition.dateValidity]?.sub(0)?.value as? Date
+        if date == nil {
+            date = asn1.first?.sub(0)?.sub(3)?.value as? Date
+        }
+        return date
     }
 
     /// Gets the notAfter date from the validity period of the certificate.
     public var notAfter: Date? {
-        return block1[X509BlockPosition.dateValidity]?.sub(1)?.value as? Date
+        var date = block1[X509BlockPosition.dateValidity]?.sub(1)?.value as? Date
+        if date == nil {
+            date = asn1.first?.sub(0)?.sub(4)?.value as? Date
+        }
+        return date
     }
 
     /// Gets the signature value (the raw signature bits) from the certificate.
