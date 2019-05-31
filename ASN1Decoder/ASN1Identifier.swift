@@ -23,7 +23,7 @@
 
 import Foundation
 
-public class ASN1Identifier: CustomStringConvertible {
+public class ASN1Identifier: NSObject {
 
     public enum Class : UInt8 {
         case universal = 0x00
@@ -90,7 +90,8 @@ public class ASN1Identifier: CustomStringConvertible {
         return TagNumber(rawValue: rawValue & 0x1F) ?? .endOfContent
     }
 
-    public var description: String {
+    public override var description: String {
+    
         if typeClass() == .universal {
             return String(describing: tagNumber())
         }

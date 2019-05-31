@@ -23,7 +23,7 @@
 
 import Foundation
 
-public class ASN1Object : CustomStringConvertible {
+public class ASN1Object : NSObject {
     /// This property contains the DER encoded object
     public var rawValue: Data?
 
@@ -62,7 +62,7 @@ public class ASN1Object : CustomStringConvertible {
         return nil
     }
 
-    public var description: String {
+    public override var description: String {
         return printAsn1()
     }
 

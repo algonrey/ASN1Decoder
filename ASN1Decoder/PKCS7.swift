@@ -23,7 +23,7 @@
 
 import Foundation
 
-public class PKCS7 {
+public class PKCS7: NSObject {
     let derData: Data
     let asn1: [ASN1Object]
     let mainBlock: ASN1Object

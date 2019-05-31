@@ -23,7 +23,7 @@
 
 import Foundation
 
-public class X509Certificate: CustomStringConvertible {
+public class X509Certificate: NSObject {
     private let asn1: [ASN1Object]
     private let block1: ASN1Object
 
@@ -45,8 +45,8 @@ public class X509Certificate: CustomStringConvertible {
         case publicKey = 6
         case extensions = 7
     }
-
-    public convenience init(data: Data) throws {
+    
+    @objc public convenience init(data: Data) throws {
         if String(data: data, encoding: .utf8)?.contains(X509Certificate.beginPemBlock) ?? false {
             try self.init(pem: data)
         } else {
@@ -79,12 +79,12 @@ public class X509Certificate: CustomStringConvertible {
         self.block1 = block1
     }
 
-    public var description: String {
+    public override var description: String {
         return asn1.reduce("") { $0 + "\($1.description)\n" }
     }
 
     /// Checks that the given date is within the certificate's validity period.
-    public func checkValidity(_ date: Date = Date()) -> Bool {
+    @objc public func checkValidity(_ date: Date = Date()) -> Bool {
         if let notBefore = notBefore, let notAfter = notAfter {
             return date > notBefore && date < notAfter
         }
@@ -164,7 +164,7 @@ public class X509Certificate: CustomStringConvertible {
     }
 
     /// Gets the notBefore date from the validity period of the certificate.
-    public var notBefore: Date? {
+    @objc public var notBefore: Date? {
         var date = block1[X509BlockPosition.dateValidity]?.sub(0)?.value as? Date
         if date == nil {
             date = asn1.first?.sub(0)?.sub(3)?.value as? Date
@@ -173,7 +173,7 @@ public class X509Certificate: CustomStringConvertible {
     }
 
     /// Gets the notAfter date from the validity period of the certificate.
-    public var notAfter: Date? {
+    @objc public var notAfter: Date? {
         var date = block1[X509BlockPosition.dateValidity]?.sub(1)?.value as? Date
         if date == nil {
             date = asn1.first?.sub(0)?.sub(4)?.value as? Date

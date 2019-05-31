@@ -24,7 +24,7 @@
 import Foundation
 
 
-public class ASN1DERDecoder {
+public class ASN1DERDecoder: NSObject {
     
     public static func decode(data: Data) throws -> [ASN1Object] {
         var iterator = data.makeIterator()
