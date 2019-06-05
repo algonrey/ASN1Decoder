@@ -1,5 +1,7 @@
-# ASN1Decoder
+# ASN1Decoder+CRL
 ASN1 DER Decoder for X.509 Certificate
+
+In this fork from the filom version, we add support for Objective-C and also get dates expiration dates from CRL files.
 
 ## Requirements
 
@@ -10,32 +12,23 @@ ASN1 DER Decoder for X.509 Certificate
 
 #### CocoaPods (iOS 9+, OS X 10.10+)
 
-You can use [CocoaPods](http://cocoapods.org/) to install `ASN1Decoder` by adding it to your `Podfile`:
+You can use [CocoaPods](http://cocoapods.org/) to install `ASN1Decoder+CRL` by adding it to your `Podfile`:
 
 ```ruby
 platform :ios, '9.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'ASN1Decoder'
+	pod 'ASN1Decoder+CRL'
 end
 ```
-
-#### Carthage (iOS 9+, OS X 10.10+)
-
-You can use [Carthage](https://github.com/Carthage/Carthage) to install `ASN1Decoder` by adding it to your `Cartfile`:
-
-```
-github "filom/ASN1Decoder"
-```
-
 
 ## Usage
 
 ### Parse a DER/PEM X.509 certificate
 
 ``` swift
-import ASN1Decoder
+import ASN1Decoder_CRL
 
 do {
     let x509 = try X509Certificate(data: certData)
@@ -55,7 +48,7 @@ Define a delegate for URLSession
 
 ``` swift
 import Security
-import ASN1Decoder
+import ASN1Decoder_CRL
 
 class PinningURLSessionDelegate: NSObject, URLSessionDelegate {
 
@@ -134,7 +127,7 @@ openssl x509 -modulus -noout < certificate.cer
 ### How to use for AppStore receipt parse
 
 ``` swift
-import ASN1Decoder
+import ASN1Decoder_CRL
 
 if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
             FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
