@@ -8,10 +8,8 @@ Pod::Spec.new do |s|
   s.author       = { "Filippo Maguolo" => "maguolo.ios@outlook.com" }
   s.ios.deployment_target = "9.0"
   s.osx.deployment_target = "10.10"
-  s.source        = { :git => "https://github.com/algonrey/ASN1Decoder", :tag => s.version }
+  s.source        = { :git => "https://github.com/algonrey/ASN1Decoder.git", :tag => s.version }
   s.source_files  = "ASN1Decoder/*.swift"
   s.frameworks    = "Foundation"
-  s.pod_target_xcconfig =  {
-        'SWIFT_VERSION' => '4.0',
-  }
+  s.swift_version = '4.0'
 end
