@@ -26,6 +26,7 @@ end
 #### Swift Package Manager
 
 Go to XCode --> File --> Add Package Dependencies --> In serach enter --> https://github.com/algonrey/ASN1Decoder
+
 Now add this dependency in your Target.
 
 ## Usage
