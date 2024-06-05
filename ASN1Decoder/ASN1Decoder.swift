@@ -154,7 +154,6 @@ public class ASN1DERDecoder: NSObject {
                         
                         
                     default:
-                        print("unsupported tag: \(asn1obj.identifier!.tagNumber())")
                         asn1obj.value = contentData
                         break
                     }
